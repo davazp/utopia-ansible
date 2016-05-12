@@ -1,0 +1,15 @@
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Ensure XServer is installed
+      apt: name=xserver-xorg-core state=present
+
+    - name: Ensure LightDM is installed
+      apt: name=lightdm state=present
+
+    - name: Ensure Awesome Window Manager is installed
+      apt: name=awesome state=present
+
+    - name: Convert Capslock into additional Ctrl 
+      lineinfile: dest=/etc/default/keyboard regexp=XKBOPTIONS backup=yes state=present line="XKBOPTIONS=\"ctrl:nocaps\""

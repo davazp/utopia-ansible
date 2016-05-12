@@ -1,0 +1,8 @@
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Ensure basic command line tools are available
+      apt: name={{item}} state=present
+      with_items:
+        - htop
