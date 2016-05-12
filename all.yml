@@ -1,3 +1,4 @@
 
 - include: basic.yml
+- include: development.yml
 - include: graphical.yml

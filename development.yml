@@ -1,0 +1,32 @@
+
+- hosts: all
+  sudo: true
+  handlers:
+    - name: Reload APT cache
+      apt: update_cache=yes
+      
+  tasks:
+    - name: Install python-apt
+      apt: name=python-apt state=present
+
+    - name: Add contrib packages to sources.list
+      lineinfile: regexp="^deb .*ftp\.nl\.debian\.org/debian/ jessie main" backup=yes state=present line="deb http://ftp.nl.debian.org/debian/ jessie main contrib non-free" dest=/etc/apt/sources.list
+      notify: Reload APT cache
+
+    - name: Add contrib packages to sources.list
+      lineinfile: regexp="^deb-src .*ftp\.nl\.debian\.org/debian/ jessie main" backup=yes state=present line="deb-src http://ftp.nl.debian.org/debian/ jessie main contrib non-free" dest=/etc/apt/sources.list
+      notify: Reload APT cache
+
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Ensure that Git is installed
+      apt: name=git state=present
+
+    - name: Ensure that GNU/Emacs is installed
+      apt: name={{item}} state=present
+      with_items:
+        - emacs24
+        - emacs24-el
+        - emacs24-common-non-dfsg
