@@ -6,7 +6,7 @@
       apt: update_cache=yes
       
   tasks:
-    - name: Install python-apt
+    - name: Install ansible dependencies
       apt: name=python-apt state=present
 
     - name: Add contrib packages to sources.list
@@ -30,3 +30,8 @@
         - emacs24
         - emacs24-el
         - emacs24-common-non-dfsg
+
+- hosts: all
+  tasks:
+    - name: Configure GNU/Emacs from the dotemacs repository
+      git: dest="~/.emacs.d/dotemacs" update=no repo="https://github.com/davazp/dotemacs.git"
