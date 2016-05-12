@@ -41,3 +41,31 @@
   tasks:
     - name: Ensure that SBCL is available
       apt: name=sbcl state=present
+
+
+- hosts: all
+  sudo: true
+  handlers:
+    - name: Reload APT cache
+      apt: update_cache=yes
+  tasks:
+    - name: Download key for the NodeSource repository
+      apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+
+    - name: Ensure apt-transport-https is installed
+      apt: name=apt-transport-https state=present
+
+    - name: Add the NodeSource repository
+      apt_repository: repo="deb https://deb.nodesource.com/node_4.x jessie main" state=present
+      notify: Reload APT cache
+
+    - name: Add the NodeSource repository source
+      apt_repository: repo="deb-src https://deb.nodesource.com/node_4.x jessie main" state=present
+      notify: Reload APT cache
+
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Install NodeJS
+      apt: name=nodejs state=present
