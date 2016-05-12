@@ -69,3 +69,10 @@
   tasks:
     - name: Install NodeJS
       apt: name=nodejs state=present
+
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Install stand-alone Lua
+      apt: name=lua5.2 state=present
