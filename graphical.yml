@@ -13,3 +13,9 @@
 
     - name: Convert Capslock into additional Ctrl 
       lineinfile: dest=/etc/default/keyboard regexp=XKBOPTIONS backup=yes state=present line="XKBOPTIONS=\"ctrl:nocaps\""
+
+    - name: Ensure the Sakura terminal is available
+      apt: name=sakura state=present
+
+    - name: Ensure Chromium is installed
+      apt: name=chromium state=present
