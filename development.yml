@@ -35,3 +35,9 @@
   tasks:
     - name: Configure GNU/Emacs from the dotemacs repository
       git: dest="~/.emacs.d/dotemacs" update=no repo="https://github.com/davazp/dotemacs.git"
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Ensure that SBCL is available
+      apt: name=sbcl state=present
