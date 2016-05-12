@@ -6,3 +6,13 @@
       apt: name={{item}} state=present
       with_items:
         - htop
+        - screen
+        - curl
+
+- hosts: all
+  tasks:
+    - name: Create additional directory strucuture in the home
+      file: path="{{item}}" state=directory
+      with_items:
+        - ~/bin
+        - ~/tmp
