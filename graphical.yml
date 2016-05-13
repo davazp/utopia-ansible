@@ -19,3 +19,10 @@
 
     - name: Ensure Chromium is installed
       apt: name=chromium state=present
+
+
+- hosts: all
+  tags: personal
+  tasks:
+    - name: Install my awesome configuration from the dotawesome repository
+      git: dest="~/.config/awesome" update=no repo="https://github.com/davazp/dotawesome.git"
