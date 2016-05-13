@@ -77,3 +77,10 @@
   tasks:
     - name: Install stand-alone Lua
       apt: name=lua5.2 state=present
+
+
+- hosts: all
+  tags: personal
+  tasks:
+    - name: Configure utilities by cloning the dotfiles repository
+      git: dest="~/.dotfiles" update=no repo="https://github.com/davazp/dotfiles.git"
