@@ -8,6 +8,7 @@
         - htop
         - screen
         - curl
+        - jq
 
 - hosts: all
   tasks:
