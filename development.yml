@@ -32,6 +32,7 @@
         - emacs24-common-non-dfsg
 
 - hosts: all
+  tags: personal
   tasks:
     - name: Configure GNU/Emacs from the dotemacs repository
       git: dest="~/.emacs.d/dotemacs" update=no repo="https://github.com/davazp/dotemacs.git"
