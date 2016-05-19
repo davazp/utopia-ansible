@@ -37,6 +37,14 @@
     - name: Configure GNU/Emacs from the dotemacs repository
       git: dest="~/.emacs.d/dotemacs" update=no repo="https://github.com/davazp/dotemacs.git"
 
+
+- hosts: all
+  tags: personal
+  tasks:
+    - name: Configure utilities by cloning the dotfiles repository
+      git: dest="~/.dotfiles" update=no repo="https://github.com/davazp/dotfiles.git"
+
+
 # 
 # Programming languages
 # 
