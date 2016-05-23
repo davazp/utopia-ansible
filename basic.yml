@@ -8,7 +8,14 @@
         - htop
         - screen
         - curl
+
+- hosts: all
+  tasks:
+    - name: Ensure some more advanced tools are available too
+      apt: name={{item}} state=present
+      with_items:
         - jq
+        - xvfb
 
 - hosts: all
   tasks:
