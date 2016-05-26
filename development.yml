@@ -31,6 +31,14 @@
         - emacs24-el
         - emacs24-common-non-dfsg
 
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Ensure sqlite3 command line tool is installed
+      apt: name=sqlite3 state=present
+
+
 - hosts: all
   tags: personal
   tasks:
