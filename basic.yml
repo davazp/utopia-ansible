@@ -10,12 +10,14 @@
         - curl
 
 - hosts: all
+  sudo: true
   tasks:
     - name: Ensure some more advanced tools are available too
       apt: name={{item}} state=present
       with_items:
         - jq
         - xvfb
+        - imagemagick
 
 - hosts: all
   tasks:
