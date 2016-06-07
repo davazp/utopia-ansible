@@ -8,6 +8,7 @@
         - htop
         - screen
         - curl
+        - tree
 
 - hosts: all
   sudo: true
