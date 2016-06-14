@@ -1,36 +1,8 @@
-
-- hosts: all
-  sudo: true
-  handlers:
-    - name: Reload APT cache
-      apt: update_cache=yes
-      
-  tasks:
-    - name: Install ansible dependencies
-      apt: name=python-apt state=present
-
-    - name: Add contrib packages to sources.list
-      lineinfile: regexp="^deb .*ftp\.nl\.debian\.org/debian/ jessie main" backup=yes state=present line="deb http://ftp.nl.debian.org/debian/ jessie main contrib non-free" dest=/etc/apt/sources.list
-      notify: Reload APT cache
-
-    - name: Add contrib packages to sources.list
-      lineinfile: regexp="^deb-src .*ftp\.nl\.debian\.org/debian/ jessie main" backup=yes state=present line="deb-src http://ftp.nl.debian.org/debian/ jessie main contrib non-free" dest=/etc/apt/sources.list
-      notify: Reload APT cache
-
-
-- hosts: all
-  sudo: true
-  tasks:
-    - name: Ensure that Git is installed
-      apt: name=git state=present
-
-    - name: Ensure that GNU/Emacs is installed
-      apt: name={{item}} state=present
-      with_items:
-        - emacs24
-        - emacs24-el
-        - emacs24-common-non-dfsg
-
+- include: development/emacs.yml
+- include: development/node.yml
+- include: development/lisp.yml
+- include: development/lua.yml
+- include: development/haskell.yml
 
 - hosts: all
   sudo: true
@@ -38,95 +10,15 @@
     - name: Ensure sqlite3 command line tool is installed
       apt: name=sqlite3 state=present
 
-
-- hosts: all
-  tags: personal
-  tasks:
-    - name: Configure GNU/Emacs from the dotemacs repository
-      git: dest="~/.emacs.d/dotemacs" update=no repo="https://github.com/davazp/dotemacs.git"
-
-
 - hosts: all
   tags: personal
   tasks:
     - name: Configure utilities by cloning the dotfiles repository
       git: dest="~/.dotfiles" update=no repo="https://github.com/davazp/dotfiles.git"
-
-
-# 
-# Programming languages
-# 
-
-- hosts: all
-  sudo: true
-  tasks:
-    - name: Ensure that SBCL is available
-      apt: name=sbcl state=present
-
-
-- hosts: all
-  sudo: true
-  handlers:
-    - name: Reload APT cache
-      apt: update_cache=yes
-  tasks:
-    - name: Download key for the NodeSource repository
-      apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
-
-    - name: Ensure apt-transport-https is installed
-      apt: name=apt-transport-https state=present
-
-    - name: Add the NodeSource repository
-      apt_repository: repo="deb https://deb.nodesource.com/node_4.x jessie main" state=present
-      notify: Reload APT cache
-
-    - name: Add the NodeSource repository source
-      apt_repository: repo="deb-src https://deb.nodesource.com/node_4.x jessie main" state=present
-      notify: Reload APT cache
-
-
-- hosts: all
-  sudo: true
-  tasks:
-    - name: Install NodeJS
-      apt: name=nodejs state=present
-
-    - name: Ensure basic NodeJS tools is available
-      npm: name={{item}} global=yes state=present
-      with_items:
-        - nodemon
-        - gulp
-        - grunt
-
-
-- hosts: all
-  sudo: true
-  tasks:
-    - name: Install stand-alone Lua
-      apt: name=lua5.2 state=present
-
-- hosts: all
-  sudo: true
-  tasks:
-    - name: Install GHC Haskell Compiler
-      apt: name={{item}} state=present
-      with_items:
-        - ghc
-        - cabal-install
-
-
-- hosts: all
-  tags: personal
-  tasks:
-    - name: Configure utilities by cloning the dotfiles repository
-      git: dest="~/.dotfiles" update=no repo="https://github.com/davazp/dotfiles.git"
-
-
 
 #
 # Projects
 #
-
 - hosts: all
   tags: personal
   tasks:

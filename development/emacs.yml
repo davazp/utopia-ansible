@@ -1,0 +1,19 @@
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Ensure that Git is installed
+      apt: name=git state=present
+
+    - name: Ensure that GNU/Emacs is installed
+      apt: name={{item}} state=present
+      with_items:
+        - emacs24
+        - emacs24-el
+        - emacs24-common-non-dfsg
+
+
+- hosts: all
+  tags: personal
+  tasks:
+    - name: Configure GNU/Emacs from the dotemacs repository
+      git: dest="~/.emacs.d/dotemacs" update=no repo="https://github.com/davazp/dotemacs.git"

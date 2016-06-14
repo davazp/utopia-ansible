@@ -1,0 +1,5 @@
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Ensure that SBCL is available
+      apt: name=sbcl state=present
