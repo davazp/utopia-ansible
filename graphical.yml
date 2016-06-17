@@ -20,6 +20,9 @@
     - name: Ensure Chromium is installed
       apt: name=chromium state=present
 
+    - name: Ensure gparted is installed
+      apt: name=gparted state=present
+
 
 - hosts: all
   tags: personal
