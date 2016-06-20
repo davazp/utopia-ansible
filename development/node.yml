@@ -25,7 +25,7 @@
     - name: Install NodeJS
       apt: name=nodejs state=present
 
-    - name: Ensure basic NodeJS tools is available
+    - name: Ensure basic NodeJS tools are available
       npm: name={{item}} global=yes state=present
       with_items:
         - nodemon
