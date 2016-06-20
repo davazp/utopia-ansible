@@ -29,3 +29,21 @@
   tasks:
     - name: Install my awesome configuration from the dotawesome repository
       git: dest="~/.config/awesome" update=no repo="https://github.com/davazp/dotawesome.git"
+
+    - name: Use Emacs keybindings for GTK-2.0
+      copy:
+        content: >-
+          gtk-key-theme-name = "Emacs"
+        dest: "~/.gtkrc-2.0"
+
+    - name: Create directory for GTK-3.0 personal configuration
+      file: path="~/.config/gtk-3.0" state=directory
+
+    - name: Use Emacs keybindings for GTK-3.0 applications
+      copy:
+        content: >-
+          [Settings]
+          gtk-key-theme-name = Emacs
+        dest: "~/.config/gtk-3.0/settings.ini"
+
+
