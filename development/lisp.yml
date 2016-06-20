@@ -3,3 +3,6 @@
   tasks:
     - name: Ensure that SBCL is available
       apt: name=sbcl state=present
+
+    - name: Ensure that Scheme is available
+      apt: name=racket state=present
