@@ -1,0 +1,5 @@
+
+- hosts: localhost
+  sudo: true
+  tasks:
+    - npm: name=elm global=yes state=present
