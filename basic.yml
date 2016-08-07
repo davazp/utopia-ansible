@@ -1,5 +1,5 @@
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Ensure basic command line tools are available
       apt: name={{item}} state=present
@@ -12,7 +12,7 @@
         - unzip
 
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Ensure some more advanced tools are available too
       apt: name={{item}} state=present
@@ -34,7 +34,7 @@
 
 
 - hosts: all
-  sudo: true
+  become: true
   handlers:
     - name: Reload APT cache
       apt: update_cache=yes

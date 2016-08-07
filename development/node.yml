@@ -1,5 +1,5 @@
 - hosts: all
-  sudo: true
+  become: true
   handlers:
     - name: Reload APT cache
       apt: update_cache=yes
@@ -20,7 +20,7 @@
 
 
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Install NodeJS
       apt: name=nodejs state=present

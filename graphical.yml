@@ -1,6 +1,6 @@
 
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Ensure XServer is installed
       apt: name=xserver-xorg-core state=present

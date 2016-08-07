@@ -5,7 +5,7 @@
 - include: development/haskell.yml
 
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Install system programming tools
       apt: name={{item}} state=present
@@ -15,7 +15,7 @@
         - linux-tools
 
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Ensure sqlite3 command line tool is installed
       apt: name=sqlite3 state=present

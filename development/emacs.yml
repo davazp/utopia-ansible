@@ -1,5 +1,5 @@
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Ensure that Git is installed
       apt: name=git state=present

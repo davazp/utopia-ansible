@@ -1,5 +1,5 @@
 - hosts: all
-  sudo: true
+  become: true
   handlers:
     - name: Reload APT cache
       apt: update_cache=yes
@@ -13,7 +13,7 @@
 
 
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Install PostgreSQL 9.5 and tools
       apt: name={{item}} state=present
@@ -23,9 +23,9 @@
         - python-psycopg2
 
 - hosts: all
-  sudo: true
-  sudo_user: postgres
+  become: true
+  become_user: postgres
   tasks:
     - name: Add my user as an admin to PostgreSQL
-      # TODO: Get the username before sudoing to postgresql instead
+      # TODO: Get the username before becomeing to postgresql instead
       postgresql_user: name=davazp role_attr_flags=SUPERUSER

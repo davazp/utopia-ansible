@@ -1,5 +1,5 @@
 - hosts: all
-  sudo: true
+  become: true
   tasks:
     - name: Install stand-alone Lua
       apt: name=lua5.2 state=present
