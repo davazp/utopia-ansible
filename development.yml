@@ -25,17 +25,3 @@
   tasks:
     - name: Configure utilities by cloning the dotfiles repository
       git: dest="~/.dotfiles" update=no repo="https://github.com/davazp/dotfiles.git"
-
-#
-# Projects
-#
-- hosts: all
-  tags: personal
-  tasks:
-    - name: Clone my main personal projects from github
-      git: dest="~/Projects/{{item.name}}" repo={{item.url}} update=no
-      with_items:
-        - name: jscl
-          url: https://github.com/davazp/jscl.git
-        - name: eulex
-          url: https://github.com/davazp/eulex.git
