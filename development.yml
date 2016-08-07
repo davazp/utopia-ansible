@@ -7,6 +7,16 @@
 - hosts: all
   sudo: true
   tasks:
+    - name: Install system programming tools
+      apt: name={{item}} state=present
+      with_items:
+        - ltrace
+        - strace
+        - linux-tools
+
+- hosts: all
+  sudo: true
+  tasks:
     - name: Ensure sqlite3 command line tool is installed
       apt: name=sqlite3 state=present
 
