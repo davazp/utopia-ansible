@@ -31,3 +31,12 @@
         - nodemon
         - gulp
         - grunt
+
+
+- hosts: all
+  tasks:
+    - name: Clone tern repository into ~/.tern
+      git: dest="~/.tern" update=no repo="https://github.com/ternjs/tern.git"
+
+    - name: Install tern
+      npm: path="~/.tern/"
