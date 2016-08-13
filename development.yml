@@ -1,5 +1,5 @@
 - include: development/emacs.yml
-- include: development/node.yml
+- include: development/javascript.yml
 - include: development/lisp.yml
 - include: development/lua.yml
 - include: development/haskell.yml
