@@ -1,0 +1,14 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Download Go archive
+      get_url:
+        url: 'https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz'
+        dest: /usr/local/src/
+        checksum: sha256:702ad90f705365227e902b42d91dd1a40e48ca7f67a2f4b2fd052aaa4295cd95
+
+    - name: Extract Go archive
+      unarchive: src=/usr/local/src/go1.7.linux-amd64.tar.gz dest=/usr/local
+
+    - name: Including /usr/local/go/bin in the path
+      copy: src=go_profile.sh dest=/etc/profile.d/go.sh
