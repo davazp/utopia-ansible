@@ -30,8 +30,7 @@
       with_items:
         - ~/bin
         - ~/tmp
-        - ~/Projects
-
+        # - ~/Projects
 
 - hosts: all
   become: true
