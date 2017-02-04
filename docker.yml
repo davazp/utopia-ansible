@@ -1,0 +1,22 @@
+- hosts: all
+  become: true
+  handlers:
+    - name: Reload APT cache
+      apt: update_cache=yes
+  tasks:
+    - name: Ensure APT dependencies are included
+      apt: name={{item}} state=present
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - software-properties-common
+
+    - name: Download key for the Docker repository
+      apt_key: url=https://yum.dockerproject.org/gpg state=present
+      notify: Reload APT cache
+
+    - name: Add Docker repository
+      apt_repository: repo="deb https://apt.dockerproject.org/repo/ debian-jessie main" state=present
+
+    - name: Install Docker
+      apt: name=docker-engine state=present
