@@ -19,9 +19,3 @@
   tasks:
     - name: Ensure sqlite3 command line tool is installed
       apt: name=sqlite3 state=present
-
-- hosts: all
-  tags: personal
-  tasks:
-    - name: Configure utilities by cloning the dotfiles repository
-      git: dest="~/.dotfiles" update=no repo="https://github.com/davazp/dotfiles.git"
