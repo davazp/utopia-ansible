@@ -10,12 +10,20 @@
     - name: Ensure apt-transport-https is installed
       apt: name=apt-transport-https state=present
 
-    - name: Add the NodeSource repository
-      apt_repository: repo="deb https://deb.nodesource.com/node_4.x jessie main" state=present
+    - name: Delete the NodeSource repository for 4.x
+      apt_repository: repo="deb https://deb.nodesource.com/node_4.x jessie main" state=absent
       notify: Reload APT cache
 
-    - name: Add the NodeSource repository source
-      apt_repository: repo="deb-src https://deb.nodesource.com/node_4.x jessie main" state=present
+    - name: Delete the NodeSource repository source for 4.x
+      apt_repository: repo="deb-src https://deb.nodesource.com/node_4.x jessie main" state=absent
+      notify: Reload APT cache
+
+    - name: Add the NodeSource repository for 6.x
+      apt_repository: repo="deb https://deb.nodesource.com/node_6.x jessie main" state=present
+      notify: Reload APT cache
+
+    - name: Add the NodeSource repository source 6.x
+      apt_repository: repo="deb-src https://deb.nodesource.com/node_6.x jessie main" state=present
       notify: Reload APT cache
 
 
@@ -23,10 +31,10 @@
   become: true
   tasks:
     - name: Install NodeJS
-      apt: name=nodejs state=present
+      apt: name=nodejs state=latest
 
     - name: Ensure basic NodeJS tools are available
-      npm: name={{item}} global=yes state=present
+      npm: name={{item}} global=yes state=latest
       with_items:
         - nodemon
         - gulp
