@@ -20,3 +20,6 @@
 
     - name: Install Docker
       apt: name=docker-engine state=present
+
+    - name: Add user to docker group
+      user: name=davazp groups=docker append=yes
