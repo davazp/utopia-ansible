@@ -11,6 +11,7 @@
         - tree
         - unzip
         - ncdu
+        - direnv
 
 - hosts: all
   become: true
