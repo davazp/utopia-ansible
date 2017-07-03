@@ -10,20 +10,20 @@
     - name: Ensure apt-transport-https is installed
       apt: name=apt-transport-https state=present
 
-    - name: Delete the NodeSource repository for 4.x
-      apt_repository: repo="deb https://deb.nodesource.com/node_4.x jessie main" state=absent
+    - name: Delete the NodeSource repository for 6.x
+      apt_repository: repo="deb https://deb.nodesource.com/node_6.x stretch main" state=absent
       notify: Reload APT cache
 
-    - name: Delete the NodeSource repository source for 4.x
-      apt_repository: repo="deb-src https://deb.nodesource.com/node_4.x jessie main" state=absent
+    - name: Delete the NodeSource repository source 6.x
+      apt_repository: repo="deb-src https://deb.nodesource.com/node_6.x stretch main" state=absent
       notify: Reload APT cache
 
-    - name: Add the NodeSource repository for 6.x
-      apt_repository: repo="deb https://deb.nodesource.com/node_6.x jessie main" state=present
+    - name: Add the NodeSource repository for 8.x
+      apt_repository: repo="deb https://deb.nodesource.com/node_8.x stretch main" state=present
       notify: Reload APT cache
 
-    - name: Add the NodeSource repository source 6.x
-      apt_repository: repo="deb-src https://deb.nodesource.com/node_6.x jessie main" state=present
+    - name: Add the NodeSource repository source 8.x
+      apt_repository: repo="deb-src https://deb.nodesource.com/node_8.x stretch main" state=present
       notify: Reload APT cache
 
 

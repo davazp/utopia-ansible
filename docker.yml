@@ -16,7 +16,7 @@
       notify: Reload APT cache
 
     - name: Add Docker repository
-      apt_repository: repo="deb https://apt.dockerproject.org/repo/ debian-jessie main" state=present
+      apt_repository: repo="deb https://apt.dockerproject.org/repo/ debian-stretch main" state=present
 
     - name: Install Docker
       apt: name=docker-engine state=present
